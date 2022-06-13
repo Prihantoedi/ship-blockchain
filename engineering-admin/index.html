@@ -14,7 +14,7 @@
 
 	<!-- <link rel="canonical" href="https://demo-basic.adminkit.io/" /> -->
 
-	<title>Galangan Kapal | Purchasing Admin</title>
+	<title>Galangan Kapal | Engineering Admin</title>
 
 	<link href="../css/app.css" rel="stylesheet">
 	<link href="../css/optional.css" rel="stylesheet">
@@ -26,7 +26,7 @@
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="index.html">
-					<span class="align-middle">Purchasing Admin</span>
+					<span class="align-middle">Engineering Admin</span>
 				</a>
 
 				<ul class="sidebar-nav">
@@ -34,7 +34,7 @@
 						Pages
 					</li>
 
-					<li class="sidebar-item">
+					<li class="sidebar-item active">
 						<a class="sidebar-link" href="index.html">
 							<i class="align-middle" data-feather="home"></i> <span class="align-middle">Home</span>
 						</a>
@@ -52,16 +52,11 @@
 						</a>
 					</li>
 
-				
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="notifications.html">
-							<i class="align-middle" data-feather="bell"></i> <span class="align-middle">Notifications</span>
-						</a>
-					</li>
+					
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="validation.html">
-							<i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Validation</span> <span id="validate-num">3</span>
+						<a class="sidebar-link" href="notifications.html">
+							<i class="align-middle" data-feather="bell"></i> <span>Notifications</span> <span id="notif-num">3</span>
 						</a>
 					</li>
 
@@ -77,15 +72,14 @@
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
-				
 						<li class="nav-item dropdown">
 							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
                 <i class="align-middle" data-feather="settings"></i>
               </a>
 
 			  <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                Purchasing Admin
-              </a>
+				Engineering Admin
+              </a>	
 							<div class="dropdown-menu dropdown-menu-end">
 
 								<a class="dropdown-item" href="#">Log out</a>
@@ -95,62 +89,69 @@
 				</div>
 			</nav>
 
-			<main class="content scrollable">
+			<main class="content">
 				<div class="container-fluid p-0">
 
-					<h1 class="h3 mb-3"><strong>Notifications</strong></h1>
+					<h1 class="h3 mb-3">Latest<strong> Transaction</strong> List</h1>
 
 
 					<div class="row">
 						<div class="col">
-
-                            <div class="card flex-fill mt-2">
+							<div class="card flex-fill">
 								<div class="card-header">
-									<h5 class="card-title mb-0">Recent</h5>
-								</div>
 
-                                <div class="card-body">
-                                    <i class="align-middle text-success" data-feather="check-square"></i> <span class="align-middle"> Close : Material & Logistics validate your transaction with PR No. RQBH1-20002570</span>
-                                </div>
-                                <div class="card-body">
-                                    <i class="align-middle text-success" data-feather="check-square"></i> <span class="align-middle"> Open : Material & Logistics validate your transaction with PR No. RQBH1-20002570</span>
-                                </div>
-                                <div class="card-body">
-                                    <i class="align-middle text-success" data-feather="check-square"></i> <span class="align-middle"> Close: Warehouse validate your transaction with GR No. LPB01-20001134</span>
+									<h5 class="card-title mb-0">Latest Transactions</h5>
 								</div>
+								<table class="table table-hover my-0">
+									<thead>
+										<tr>
+                                            <th>Block Number</th>
+											<th>Hash</th>
+											<th class="d-none d-xl-table-cell">Timestamp</th>
 
+										</tr>
+									</thead>
+									<tbody>
+                                        <tr>
+											<td>7</td>
+											<td><a href="transaction-detail.html?block=7">F9DKPQWNYMIBURE8JLGAO45063SX2C1ZT7VH</a></td>
+											<td class="d-none d-xl-table-cell">1885502175.117211</td>
+										</tr>
+                                        <tr>
+											<td>6</td>
+											<td><a href="transaction-detail.html?block=6">765N0AH9J4FPV2RBDYI3O8MXCGWZSKQE1LTU</a></td>
+											<td class="d-none d-xl-table-cell">1655093755.117837</td>
+										</tr>
+										<tr>
+											<td>5</td>
+											<td><a href="transaction-detail.html?block=5">Z0PKESG2LY5IOJCBNUA39W8F6DX1QHM7VRT4</a></td>
+											<td class="d-none d-xl-table-cell">1655093755.117837</td>
+										</tr>
+
+                                        <tr>
+											<td>4</td>
+											<td><a href="transaction-detail.html?block=4">853D2KO1HXQEMRP6S4ZGFAVUL7WNYTI09CJB</a></td>
+											<td class="d-none d-xl-table-cell">12334093755.11123</td>
+										</tr>
+
+                                        <tr>
+											<td>3</td>
+											<td><a href="transaction-detail.html?block=3">MT1BUN34RCG8PSJH96IKAYOEXLZ5WQ702FDV</a></td>
+											<td class="d-none d-xl-table-cell">12334093755.11123</td>
+										</tr>
+
+									</tbody>
+								</table>
 							</div>
-
-                            <div class="card flex-fill mt-2">
-								<div class="card-header">
-									<h5 class="card-title mb-0">Older</h5>
-								</div>
-
-                                <div class="card-body">
-                                    <i class="align-middle text-success" data-feather="check-square"></i> <span class="align-middle"> Close: Warehouse validate your transaction with GR No. LPB01-20001134</span>
-								</div>
-                                <div class="card-body">
-                                    <i class="align-middle text-success" data-feather="check-square"></i> <span class="align-middle"> Open : Material & Logistics validate your transaction with PR No. RQBH1-20002570</span>
-                                </div>
-                                <div class="card-body">
-                                    <i class="align-middle text-success" data-feather="check-square"></i> <span class="align-middle"> Close : Material & Logistics validate your transaction with PR No. RQBH1-20002570</span>
-                                </div>
-							</div>
-
-
-                            
-                        </div>
 					</div>
 
 				</div>
 			</main>
-
 		</div>
 	</div>
 
 	<script src="../js/app.js"></script>
     <script src="../js/additional.js"></script>
-
 </body>
 
 </html>

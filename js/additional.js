@@ -21,7 +21,7 @@ document.addEventListener("click", function(e){
         }
     }
 
-    if(clickedClass === "btn btn-primary"){
+    if(clickedClass === "btn btn-primary valid"){
         // make a transaction validation and added to blockchain 
         alert("Validation Success !!!");
     }
