@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<title>Galangan Kapal | Purchasing Admin</title>
+	<title>Galangan Kapal | Warehouse Admin</title>
 
 	<link href="../css/app.css" rel="stylesheet">
 	<link href="../css/optional.css" rel="stylesheet">
@@ -18,7 +18,7 @@
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="index.html">
-					<span class="align-middle">Purchasing Admin</span>
+					<span class="align-middle">Warehouse Admin</span>
 				</a>
 
 				<ul class="sidebar-nav">
@@ -32,28 +32,15 @@
 						</a>
 					</li>
 
-					<li class="sidebar-item active">
+					<li class="sidebar-item">
 						<a class="sidebar-link" href="transactions.html">
 							<i class="align-middle" data-feather="file-text"></i> <span class="align-middle">All Transactions</span>
 						</a>
 					</li>
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="create-transaction.html">
-							<i class="align-middle" data-feather="file"></i> <span class="align-middle">Create Transaction</span>
-						</a>
-					</li>
-
-				
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="notifications.html">
-							<i class="align-middle" data-feather="bell"></i> <span class="align-middle">Notifications</span><span id="notif-num">3</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
+					<li class="sidebar-item active">
 						<a class="sidebar-link" href="validation.html">
-							<i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Validation</span><span id="validate-num">3</span>
+							<i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Validation</span>
 						</a>
 					</li>
 
@@ -69,13 +56,14 @@
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
+			
 						<li class="nav-item dropdown">
 							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
                 <i class="align-middle" data-feather="settings"></i>
               </a>
 
 			  <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                Purchasing Admin
+                Warehouse Admin
               </a>
 							<div class="dropdown-menu dropdown-menu-end">
 
@@ -89,7 +77,8 @@
 			<main class="content scrollable">
 				<div class="container-fluid p-0">
 
-					<h1 class="h3 mb-3"><strong>Transaction Detail</strong></h1>
+					<h1 class="h3 mb-3"><strong>Validate Transactions</strong></h1>
+
 
 					<div class="row">
 						<div class="col">
@@ -97,43 +86,23 @@
 
                             <div class="card flex-fill mt-2">
 								<div class="card-header">
-									<h5 class="card-title mb-0">Block Number: 7</h5>
 								</div>
 
                                 <div class="card-body">
                                     <table class="table">
                                         <tbody>
                                             <tr>
-                                                <td>Previous</td>
-                                                <td>765N0AH9J4FPV2RBDYI3O8MXCGWZSKQE1LTU</td>
-                                            </tr>
-                                            <tr>
                                                 <td>Sender</td>
-                                                <td>Material & Logistics</td>
+                                                <td>Purchasing</td>
                                             </tr>
                                             <tr>
                                                 <td>Recipient</td>
-                                                <td>Purchasing</td>
+                                                <td>Warehouse</td>
                                             </tr>
 
                                             <tr>
-                                                <td>PO No.</td>
-                                                <td>RQBH1-20002570</td>
-                                            </tr>
-
-											<tr>
-                                                <td>Vendor Name</td>
-                                                <td>PT. SAMASUNDU ABIDRAYA</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Vendor Code</td>
-                                                <td>V-000019</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Vendor City</td>
-                                                <td>MKS</td>
+                                                <td>GR No.</td>
+                                                <td>LPB01-20001134</td>
                                             </tr>
 
                                             <tr>
@@ -154,37 +123,15 @@
                                             <tr>
                                                 <td>Unit</td>
                                                 <td>Btg</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Status PO</td>
-                                                <td>Close</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Nonce</td>
-                                                <td>10943</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Timestamp</td>
-                                                <td>1715523492.1341837</td>
-                                            </tr>
-
-
-                                            <tr>
-                                                <td>Hash</td>
-                                                <td>F9DKPQWNYMIBURE8JLGAO45063SX2C1ZT7VH</td>
-                                            </tr>
-                                            
+                                            </tr>                                            
                                         </tbody>
 
                                     </table>
-									
+									<a type="button" class="btn btn-primary valid">Validate</a>
+                                    <a href="#" class="btn btn-danger">Reject</a>
 								</div>
 							</div>
 
-                           
                         </div>
 					</div>
 
