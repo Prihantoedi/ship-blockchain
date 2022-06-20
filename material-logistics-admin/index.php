@@ -1,3 +1,11 @@
+<?php 
+    session_start();
+	require("../authorization.php");
+    authorizationCheck("material-logistics-admin", $_SESSION);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +14,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<title>Galangan Kapal | Engineering Admin</title>
+	<title>Galangan Kapal | Material & Logistics Admin</title>
 
 	<link href="../css/app.css" rel="stylesheet">
 	<link href="../css/optional.css" rel="stylesheet">
@@ -18,7 +26,7 @@
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="index.html">
-					<span class="align-middle">Engineering Admin</span>
+					<span class="align-middle">Material & Logistics Admin</span>
 				</a>
 
 				<ul class="sidebar-nav">
@@ -48,7 +56,13 @@
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="notifications.html">
-							<i class="align-middle" data-feather="bell"></i> <span>Notifications</span> <span id="notif-num">1</span>
+							<i class="align-middle" data-feather="bell"></i> <span>Notifications</span> <span id="notif-num">2</span>
+						</a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="validation.html">
+							<i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Validation</span> <span id="validate-num">2</span>
 						</a>
 					</li>
 
@@ -70,11 +84,11 @@
               </a>
 
 			  <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-				Engineering Admin
+				Material & Logistics Admin
               </a>	
 							<div class="dropdown-menu dropdown-menu-end">
 
-								<a class="dropdown-item" href="#">Log out</a>
+								<a class="dropdown-item" href="../sign-out.php">Log out</a>
 							</div>
 						</li>
 					</ul>

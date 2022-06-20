@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,25 +28,30 @@
 								Enter Your Private Key
 							</p>
 						</div>
+                        <?php 
+                            if(isset($_SESSION['err'])){
+                            
+                        ?>
+                            <div class="text-center text-danger"><p><?php echo $_SESSION['err']; ?></p></div>
+                        <?php 
+                                unset($_SESSION['err']);
+                            }
+                        ?>
 
 						<div class="card">
 							<div class="card-body">
 								<div class="m-sm-4">
-									<form>
-										<!-- <div class="mb-3">
-											<label class="form-label">Email</label>
-											<input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" />
-										</div> -->
+									<form method="post" action="sign-in-validation.php">
 										<div class="mb-3">
 											<label class="form-label">Private Key</label>
 											<input class="form-control form-control-lg" type="password" name="private-key"  />
 										</div>
 
 										<div class="text-center mt-3">
-											<a href="index.html" class="btn btn-lg btn-primary">Enter Network</a>
-										
+											<button type="submit" name="submit" class="btn btn-lg btn-primary">Enter Network</button>
 										</div>
 									</form>
+                                    <div style="margin-top: 10px; text-align:center;"><p>Don't have an account? <a href="sign-up.php">Click here</a></p></div>
 								</div>
 							</div>
 						</div>

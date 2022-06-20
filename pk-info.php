@@ -1,3 +1,11 @@
+<?php 
+    session_start();
+    if(!isset($_SESSION['prk'])){
+		header("Location: sign-up.php");
+		exit;
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,27 +28,18 @@
 					<div class="d-table-cell align-middle">
 
 						<div class="text-center mt-4">
-							<h1 class="h2">Get started</h1>
+							<h1 class="h2">Private Key</h1>
 							<p class="lead">
-								Enter Your Divison Here
+								Your private key is : 
 							</p>
 						</div>
-
+                        
 						<div class="card">
 							<div class="card-body">
 								<div class="m-sm-4">
-									<form>
-										<div class="mb-3">
-											<label class="form-label">Division</label>
-											<input class="form-control form-control-lg" type="text" name="division" placeholder="Enter your division" />
-										</div>
-									
-										<div class="text-center mt-3">
-											<a href="index.html" class="btn btn-lg btn-primary">Sign up</a>
-										
-										</div>
-									</form>
-									<div style="margin-top: 10px; text-align:center;"><p>Already have an account? <a href="sign-in.php">Click here</a></p></div>
+									<p><?php echo $_SESSION['prk']?></p>
+									<p>Please note this private key in your secret note because this private key cannot be requested anymore, and never share it with others!</p>
+									<div style="margin-top: 10px; text-align:center;"><a href="sign-in.php">Sign in with private key</a></div>
 								</div>
 							</div>
 						</div>
@@ -50,6 +49,9 @@
 			</div>
 		</div>
 	</main>
+	<?php 
+		unset($_SESSION['prk']);
+	?>
 
 	<script src="js/app.js"></script>
 

@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,18 +29,27 @@
 								Enter Your Divison Here
 							</p>
 						</div>
-
+                        <?php 
+                            if(isset($_SESSION['err'])){
+                            
+                        ?>
+                            <div class="text-center text-danger"><p>Division quota is full, please enter another division</p></div>
+                        <?php 
+                                unset($_SESSION['err']);
+                            }
+                        ?>
+                        
 						<div class="card">
 							<div class="card-body">
 								<div class="m-sm-4">
-									<form>
+									<form method="POST" action="sign-up-create.php">
 										<div class="mb-3">
 											<label class="form-label">Division</label>
 											<input class="form-control form-control-lg" type="text" name="division" placeholder="Enter your division" />
 										</div>
 									
 										<div class="text-center mt-3">
-											<a href="index.html" class="btn btn-lg btn-primary">Sign up</a>
+											<button type="submit" name="submit" class="btn btn-lg btn-primary">Sign up</button>
 										
 										</div>
 									</form>

@@ -1,3 +1,9 @@
+<?php 
+    session_start();
+	require("../authorization.php");
+    authorizationCheck("purchasing-admin", $_SESSION);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,7 +87,7 @@
               </a>	
 							<div class="dropdown-menu dropdown-menu-end">
 
-								<a class="dropdown-item" href="#">Log out</a>
+								<a class="dropdown-item" href="../sign-out.php">Log out</a>
 							</div>
 						</li>
 					</ul>
