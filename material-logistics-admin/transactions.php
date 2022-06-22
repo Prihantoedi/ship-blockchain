@@ -1,3 +1,17 @@
+<?php 
+    session_start();
+	require("../authorization.php");
+    authorizationCheck("material-logistics-admin", $_SESSION);
+	$sidebar_class = [
+		"home" => "sidebar-item", 
+		"all_transactions" => "sidebar-item active", 
+		"create_transaction" => "sidebar-item", 
+		"notifications" => "sidebar-item", 
+		"validation" => "sidebar-item"
+	];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,51 +29,7 @@
 
 <body>
 	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html">
-					<span class="align-middle">Material & Logistics Admin</span>
-				</a>
-
-				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Pages
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="index.html">
-							<i class="align-middle" data-feather="home"></i> <span class="align-middle">Home</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="transactions.html">
-							<i class="align-middle" data-feather="file-text"></i> <span class="align-middle">All Transactions</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="create-transaction.html">
-							<i class="align-middle" data-feather="file"></i> <span class="align-middle">Create Transaction</span>
-						</a>
-					</li>
-
-				
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="notifications.html">
-							<i class="align-middle" data-feather="bell"></i> <span class="align-middle">Notifications</span><span id="notif-num">2</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="validation.html">
-							<i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Validation</span> <span id="validate-num">2</span>
-						</a>
-					</li>
-
-				</ul>
-			</div>
-		</nav>
+        <?php include("../sidebar/material-logistics-sidebar.php"); ?>
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">

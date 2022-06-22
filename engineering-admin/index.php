@@ -1,7 +1,39 @@
 <?php 
     session_start();
     require("../authorization.php");
+	require("../connection.php");
+	require("../function-center/encrypt-decrypt.php");
+	require("../function-center/time-conversion.php");
     authorizationCheck("engineering-admin", $_SESSION);
+	
+	require("../function-center/check-node.php");
+
+	$transactions = decryption(False, $majority);
+	
+	$num_of_transaction = count($transactions) > 5 ? count($transactions) - 5 : 0;
+	
+	$slice_transaction = array_slice($transactions, $num_of_transaction);
+	$slice_transaction = array_reverse($slice_transaction);
+	
+	$transaction_for_home = array();
+	$count_block = count($transactions);
+	foreach($slice_transaction as $slice){
+		$encode_slice = json_encode($slice);
+		$slice->hash = hash("sha256", $encode_slice);
+		$slice->block_no = $count_block;
+		array_push($transaction_for_home, $slice);
+		$count_block--;
+	}
+	
+	$sidebar_class = [
+		"home" => "sidebar-item active", 
+		"all_transactions" => "sidebar-item", 
+		"create_transaction" => "sidebar-item", 
+		"notifications" => "sidebar-item", 
+	];
+
+
+	
 
 ?>
 
@@ -22,47 +54,7 @@
 
 <body>
 	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html">
-					<span class="align-middle">Engineering Admin</span>
-				</a>
-				<p>0x87a65178d26d9814b41da95b3900583b</p>
-
-				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Pages
-					</li>
-
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="index.html">
-							<i class="align-middle" data-feather="home"></i> <span class="align-middle">Home</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="transactions.html">
-							<i class="align-middle" data-feather="file-text"></i> <span class="align-middle">All Transactions</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="create-transaction.html">
-							<i class="align-middle" data-feather="file"></i> <span class="align-middle">Create Transaction</span>
-						</a>
-					</li>
-
-					
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="notifications.html">
-							<i class="align-middle" data-feather="bell"></i> <span>Notifications</span> <span id="notif-num">1</span>
-						</a>
-					</li>
-
-				</ul>
-			</div>
-		</nav>
+		<?php include("../sidebar/engineering-sidebar.php"); ?>
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
@@ -112,36 +104,49 @@
 
 										</tr>
 									</thead>
+
 									<tbody>
+										<?php foreach($transaction_for_home as $tfh) {
+										?>
+
+												<tr>
+													<td><?php echo $tfh->block_no; ?></td>
+													<td><a href="transaction-detail.php?block=<?php echo $tfh->block_no;?>"><?php echo $tfh->hash; ?></a></td>
+													<td class="d-none d-xl-table-cell"><?php echo $tfh->timestamp; ?></td>
+												</tr>
+										<!-- foreach close -->
+										<?php }?>
+									</tbody>
+									<!-- <tbody>
                                         <tr>
 											<td>7</td>
-											<td><a href="transaction-detail.html?block=7">F9DKPQWNYMIBURE8JLGAO45063SX2C1ZT7VH</a></td>
+											<td><a href="transaction-detail.php?block=7">F9DKPQWNYMIBURE8JLGAO45063SX2C1ZT7VH</a></td>
 											<td class="d-none d-xl-table-cell">1885502175.117211</td>
 										</tr>
                                         <tr>
 											<td>6</td>
-											<td><a href="transaction-detail.html?block=6">765N0AH9J4FPV2RBDYI3O8MXCGWZSKQE1LTU</a></td>
+											<td><a href="transaction-detail.php?block=6">765N0AH9J4FPV2RBDYI3O8MXCGWZSKQE1LTU</a></td>
 											<td class="d-none d-xl-table-cell">1655093755.117837</td>
 										</tr>
 										<tr>
 											<td>5</td>
-											<td><a href="transaction-detail.html?block=5">Z0PKESG2LY5IOJCBNUA39W8F6DX1QHM7VRT4</a></td>
+											<td><a href="transaction-detail.php?block=5">Z0PKESG2LY5IOJCBNUA39W8F6DX1QHM7VRT4</a></td>
 											<td class="d-none d-xl-table-cell">1655093755.117837</td>
 										</tr>
 
                                         <tr>
 											<td>4</td>
-											<td><a href="transaction-detail.html?block=4">853D2KO1HXQEMRP6S4ZGFAVUL7WNYTI09CJB</a></td>
+											<td><a href="transaction-detail.php?block=4">853D2KO1HXQEMRP6S4ZGFAVUL7WNYTI09CJB</a></td>
 											<td class="d-none d-xl-table-cell">12334093755.11123</td>
 										</tr>
 
                                         <tr>
 											<td>3</td>
-											<td><a href="transaction-detail.html?block=3">MT1BUN34RCG8PSJH96IKAYOEXLZ5WQ702FDV</a></td>
+											<td><a href="transaction-detail.php?block=3">MT1BUN34RCG8PSJH96IKAYOEXLZ5WQ702FDV</a></td>
 											<td class="d-none d-xl-table-cell">12334093755.11123</td>
 										</tr>
 
-									</tbody>
+									</tbody> -->
 								</table>
 							</div>
 					</div>

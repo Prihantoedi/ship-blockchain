@@ -1,3 +1,17 @@
+<?php 
+    session_start();
+	require("../authorization.php");
+    authorizationCheck("material-logistics-admin", $_SESSION);
+	$sidebar_class = [
+		"home" => "sidebar-item", 
+		"all_transactions" => "sidebar-item", 
+		"create_transaction" => "sidebar-item", 
+		"notifications" => "sidebar-item active", 
+		"validation" => "sidebar-item"
+	];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,8 +19,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<title>Galangan Kapal | Engineering Admin</title>
+	<title>Galangan Kapal | Material & Logistics Admin</title>
 
 	<link href="../css/app.css" rel="stylesheet">
 	<link href="../css/optional.css" rel="stylesheet">
@@ -15,45 +28,7 @@
 
 <body>
 	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html">
-					<span class="align-middle">Engineering Admin</span>
-				</a>
-
-				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Pages
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="index.html">
-							<i class="align-middle" data-feather="home"></i> <span class="align-middle">Home</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="transactions.html">
-							<i class="align-middle" data-feather="file-text"></i> <span class="align-middle">All Transactions</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="create-transaction.html">
-							<i class="align-middle" data-feather="file"></i> <span class="align-middle">Create Transaction</span>
-						</a>
-					</li>
-
-				
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="notifications.html">
-							<i class="align-middle" data-feather="bell"></i> <span class="align-middle">Notifications</span>
-						</a>
-					</li>
-
-				</ul>
-			</div>
-		</nav>
+		<?php include("../sidebar/material-logistics-sidebar.php"); ?>
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
@@ -70,7 +45,7 @@
               </a>
 
 			  <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                Engineering Admin
+                Material & Logistics Admin
               </a>
 							<div class="dropdown-menu dropdown-menu-end">
 
@@ -96,9 +71,11 @@
 								</div>
 
                                 <div class="card-body">
-                                    <i class="align-middle text-success" data-feather="check-square"></i> <span class="align-middle"> Close : Material & Logistics validate your transaction with Project Name DEMAG CRANE</span>
+                                    <i class="align-middle text-success" data-feather="check-square"></i> <span class="align-middle"> Open : Purchasing validate your transaction with PO No. RQBH1-20002570</span>
                                 </div>
-
+                                <div class="card-body">
+                                    <i class="align-middle text-success" data-feather="check-square"></i> <span class="align-middle"> Close : Purchasing validate validate your transaction with PR No. RQBH1-20002570</span>
+                                </div>
 							</div>
 
                             <div class="card flex-fill mt-2">
@@ -107,8 +84,11 @@
 								</div>
 
                                 <div class="card-body">
-                                    <i class="align-middle text-success" data-feather="check-square"></i> <span class="align-middle"> Close: Warehouse validate your transaction with  Project Name Perahu Jolloro Pare-Pare</span>
-								</div>
+                                    <i class="align-middle text-success" data-feather="check-square"></i> <span class="align-middle"> Open : Purchasing validate your transaction with PO No. RQBH1-20002570</span>
+                                </div>
+                                <div class="card-body">
+                                    <i class="align-middle text-success" data-feather="check-square"></i> <span class="align-middle"> Close : Purchasing validate validate your transaction with PR No. RQBH1-20002570</span>
+                                </div>
 							</div>
 
 

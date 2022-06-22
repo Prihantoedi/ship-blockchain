@@ -6,6 +6,9 @@
     
     if(isset($_POST['submit'])){
         
+        require("function-center/check-node.php");
+
+
         $query = mysqli_query($conn, "SELECT * FROM user");
 
         $ciphering = "AES-128-CTR";
@@ -41,7 +44,9 @@
         
 
         // pengecekkan quota divisi
-        $data = $division."_some_secret_words";
+        $micro_time = microtime(true);
+        $data = $division.$micro_time;
+        
          // cipher method
         $private_key = hash("md2", $data);
 
@@ -63,6 +68,14 @@
         
         $query_register = "INSERT INTO user (data) VALUES ('$encryption') ";
         $register = mysqli_query($conn, $query_register);
+
+        $last_id = mysqli_insert_id($conn);
+
+
+        $query_copy_transaction = "INSERT INTO transactions (user_id, transaction) VALUE ($last_id, '$majority')";
+        $insert_copy = mysqli_query($conn, $query_copy_transaction);
+
+
         $_SESSION['prk'] = $private_key;
         header("Location: pk-info.php");
         exit();

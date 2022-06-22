@@ -1,5 +1,6 @@
 <?php 
-    if(!isset($_SESSION['admin_role'])){
+    session_start();
+    if(!isset($_SESSION['role'])){
         header("Location: "."http://localhost/ship-block/sign-in.php");
     }
 

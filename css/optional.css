@@ -35,3 +35,9 @@
     background: #14e91b !important;
     color: #fff;
 }
+
+
+table tbody tr td{
+    /* border: 1px #000 solid; */
+    width: 50px;
+}
