@@ -4,6 +4,7 @@
 	require("../connection.php");
     require("../function-center/encrypt-decrypt.php");
 	require("../function-center/time-conversion.php");
+	require("../function-center/notification-function.php");
     authorizationCheck("engineering-admin", $_SESSION);
 
 
@@ -52,31 +53,7 @@
         <?php include("../sidebar/engineering-sidebar.php"); ?>
 
 		<div class="main">
-			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle">
-                    <i class="hamburger align-self-center"></i>
-                </a>
-
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav navbar-align">
-					
-						<li class="nav-item dropdown">
-							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-                                
-                                <i class="align-middle" data-feather="settings"></i>
-                            </a>
-
-                            <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                                Engineering Admin
-                            </a>
-							<div class="dropdown-menu dropdown-menu-end">
-
-								<a class="dropdown-item" href="#">Log out</a>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</nav>
+			<?php include("../navigation/engineering-navigation.php"); ?>
 
             <?php include("../content-fraction/transaction-content.php"); ?>
 		</div>

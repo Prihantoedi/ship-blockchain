@@ -1,45 +1,38 @@
 <?php 
     session_start();
 	require("../authorization.php");
-	require("../connection.php");
+    require("../connection.php");
 	require("../function-center/encrypt-decrypt.php");
-	require("../function-center/time-conversion.php");
 	require("../function-center/notification-function.php");
 	require("../function-center/validation-function.php");
+	require("../function-center/time-conversion.php");
 
-	authorizationCheck("purchasing-admin", $_SESSION);
-	require("../function-center/check-node.php");
+    authorizationCheck("purchasing-admin", $_SESSION);
 
+    require("../function-center/check-node.php");
 	$transactions = decryption(False, $majority);
-	
-	$num_of_transaction = count($transactions) > 5 ? count($transactions) - 5 : 0;
-	
-	$slice_transaction = array_slice($transactions, $num_of_transaction);
-	$slice_transaction = array_reverse($slice_transaction);
-	
-	$transaction_for_home = array();
-	$count_block = count($transactions);
-	foreach($slice_transaction as $slice){
-		$encode_slice = json_encode($slice);
-		$slice->hash = hash("sha256", $encode_slice);
-		$slice->block_no = $count_block;
-		array_push($transaction_for_home, $slice);
-		$count_block--;
-	}
-	$purchasing_id = $_SESSION['id'];
 
-	$getPendingValidation = pendingValidation($purchasing_id, $conn);
-    $need_validation = $getPendingValidation["need-validation"];
-    $validate_num_count = $getPendingValidation["validate-num-count"];
+	$block_no = $_GET["block"];
+	$block_info = $transactions[(int)$block_no - 1];
+	$encode_block_info = json_encode($block_info);
+	$block_info->hash = hash("sha256", $encode_block_info);
+	$block_info->block_no = $block_no;
 
 	$sidebar_class = [
-		"home" => "sidebar-item active", 
-		"all_transactions" => "sidebar-item", 
+		"home" => "sidebar-item", 
+		"all_transactions" => "sidebar-item active", 
 		"create_transaction" => "sidebar-item", 
 		"notifications" => "sidebar-item", 
 		"validation" => "sidebar-item"
 	];
+
+	$material_logistics_id = $_SESSION['id'];
+
+    $getPendingValidation = pendingValidation($material_logistics_id, $conn);
+    $validate_num_count = $getPendingValidation["validate-num-count"];
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,16 +50,18 @@
 
 <body>
 	<div class="wrapper">
-		<?php include("../sidebar/purchasing-sidebar.php"); ?>
+		<?php include("../sidebar/purchasing-sidebar.php");?>
+
 		<div class="main">
 			<?php include("../navigation/purchasing-navigation.php"); ?>
-
-			<?php include("../content-fraction/home-content.php"); ?>
+			<?php include("../content-fraction/transaction-detail-content.php"); ?>
 		</div>
 	</div>
 
 	<script src="../js/app.js"></script>
     <script src="../js/additional.js"></script>
+
+
 </body>
 
 </html>

@@ -1,3 +1,55 @@
+<?php 
+    session_start();
+	require("../authorization.php");
+	require("../connection.php");
+	require("../function-center/create-transaction-function.php");
+	require("../function-center/encrypt-decrypt.php");
+	require("../function-center/time-conversion.php");
+	require("../function-center/notification-function.php");
+	require("../function-center/validation-function.php");
+
+	authorizationCheck("purchasing-admin", $_SESSION);
+	require("../function-center/check-node.php");
+
+	$purchasing_id = $_SESSION['id'];
+	$submitted = 0;
+	if(isset($_POST['submit'])){
+		// die($_POST['pr-date']);
+		require("../function-center/check-node.php");
+		$submitted = 1;
+		$pr_no = $_POST['pr-no'];
+		$pr_date = $_POST['pr-date'];
+		$po_no = $_POST['po-no'];
+		$vendor_name = $_POST['vendor-name'];
+		$vendor_code = $_POST['vendor-code'];
+		$vendor_city = $_POST['vendor-city'];
+		$f_item = $_POST['f-Item'];
+		$item_description = $_POST['item-description'];
+		$quantity = $_POST['quantity'];
+		$unit = $_POST['unit'];
+		$pr_status = $_POST['pr-status'];
+		$price = $_POST['price'];
+
+		$createTransaction = new createTransaction;
+		$createTransaction->createTransPurchasing($pr_no, $pr_date, $po_no, $vendor_name, $vendor_code, $vendor_city, $f_item, $item_description, $quantity, $unit, $price, $pr_status, $purchasing_id, $majority, "material");
+	}
+
+	$getPendingValidation = pendingValidation($purchasing_id, $conn);
+    $need_validation = $getPendingValidation["need-validation"];
+    $validate_num_count = $getPendingValidation["validate-num-count"];
+
+	$sidebar_class = [
+		"home" => "sidebar-item", 
+		"all_transactions" => "sidebar-item", 
+		"create_transaction" => "sidebar-item active", 
+		"notifications" => "sidebar-item", 
+		"validation" => "sidebar-item"
+	];
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,77 +75,10 @@
 
 <body>
 	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html">
-					<span class="align-middle">Purchasing Admin</span>
-				</a>
-
-				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Pages
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="index.html">
-							<i class="align-middle" data-feather="home"></i> <span class="align-middle">Home</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="transactions.html">
-							<i class="align-middle" data-feather="file-text"></i> <span class="align-middle">All Transactions</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="create-transaction.html">
-							<i class="align-middle" data-feather="file"></i> <span class="align-middle">Create Transaction</span>
-						</a>
-					</li>
-
-					
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="notifications.html">
-							<i class="align-middle" data-feather="bell"></i> <span class="align-middle">Notifications</span><span id="notif-num">3</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="validation.html">
-							<i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Validation</span><span id="validate-num">3</span>
-						</a>
-					</li>
-
-				</ul>
-			</div>
-		</nav>
+		<?php include("../sidebar/purchasing-sidebar.php"); ?>
 
 		<div class="main">
-			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle">
-          <i class="hamburger align-self-center"></i>
-        </a>
-
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav navbar-align">
-						<li class="nav-item dropdown">
-							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-                <i class="align-middle" data-feather="settings"></i>
-              </a>
-
-			  <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                Purchasing Admin
-              </a>
-							<div class="dropdown-menu dropdown-menu-end">
-
-								<a class="dropdown-item" href="#">Log out</a>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</nav>
+			<?php include("../navigation/purchasing-navigation.php"); ?>
 
 			<main class="content scrollable">
 				<div class="container-fluid p-0">

@@ -4,6 +4,7 @@
 	require("../connection.php");
 	require("../function-center/create-transaction-function.php");
 	require("../function-center/encrypt-decrypt.php");
+	require("../function-center/notification-function.php");
 	require("../function-center/time-conversion.php");
     authorizationCheck("engineering-admin", $_SESSION);
 
@@ -45,30 +46,7 @@
 		?>
 
 		<div class="main">
-			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle">
-          <i class="hamburger align-self-center"></i>
-        </a>
-
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav navbar-align">
-				
-						<li class="nav-item dropdown">
-							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-                <i class="align-middle" data-feather="settings"></i>
-              </a>
-
-			  <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                Engineering Admin
-              </a>
-							<div class="dropdown-menu dropdown-menu-end">
-
-								<a class="dropdown-item" href="#">Log out</a>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</nav>
+			<?php include("../navigation/engineering-navigation.php"); ?>
 
 			<main class="content scrollable">
 				<div class="container-fluid p-0">
@@ -80,7 +58,7 @@
 						<div class="col">
 
 							<!-- Bila tidak ada notifikasi -->
-							<?php if(count($notif_data) <= 0){?>
+							<?php if($notif_data <= 0){?>
 							<div class="card flex-fill mt-2">
                                 <div class="card-body">
                                   <span style="font-weight: bold;">You have no notification</span>
@@ -96,7 +74,7 @@
 										</div>
 										<?php foreach($recent as $r){ ?>
 												<div class="card-body">
-													<?php if($r->validation_status == "valid") {?>
+													<?php if($r->validation_status == "Valid") {?>
 													<i class="align-middle text-success" data-feather="check-circle"></i> <span class="align-middle"> Close : Material & Logistics validate your transaction with Project Name "<?php echo $r->project_name; ?>"</span>
 													<?php } else {?>
 														<i class="align-middle text-danger" data-feather="x-circle"></i> <span class="align-middle"> Reject : Material & Logistics reject your transaction with Project Name "<?php echo $r->project_name; ?>"</span>	
@@ -114,7 +92,7 @@
 										</div>
 										<?php foreach($older as $o){?>
 												<div class="card-body">
-													<?php if($o->validation_status == "valid") {?>
+													<?php if($o->validation_status == "Valid") {?>
 													<i class="align-middle text-success" data-feather="check-circle"></i> <span class="align-middle"> Close : Material & Logistics validate your transaction with Project Name "<?php echo $o->project_name; ?>"</span>
 													<?php } else {?>
 														<i class="align-middle text-danger" data-feather="x-circle"></i> <span class="align-middle"> Reject : Material & Logistics reject your transaction with Project Name "<?php echo $o->project_name; ?>"</span>	

@@ -18,7 +18,7 @@
 <nav id="sidebar" class="sidebar js-sidebar">
 	<div class="sidebar-content js-simplebar">
 		<a class="sidebar-brand" href="index.php">
-			<span class="align-middle">Material & Logistics Admin</span>
+			<span class="align-middle">Purchasing Admin</span>
 		</a>
 
 		<ul class="sidebar-nav">

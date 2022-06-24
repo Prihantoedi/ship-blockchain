@@ -94,7 +94,7 @@
                                         </tr>
                                     </tbody>
                                 <?php }
-                                else if($all->sender = "material & logistics"){?>
+                                else if($all->sender === "material & logistics"){?>
 
                                     <tbody>
                                         <tr>
@@ -128,7 +128,7 @@
 
                                         <tr>
                                             <td>Vendor Code</td>
-                                            <td><?php echo $all->code; ?></td>
+                                            <td><?php echo $all->vendor_code; ?></td>
                                         </tr>
 
                                         <tr>
@@ -163,7 +163,7 @@
 
                                         <tr>
                                             <td>Status PO</td>
-                                            <td><?php echo $all->status_po; ?></td>
+                                            <td><?php echo $all->po_status; ?></td>
                                         </tr>
 
                                         <tr>
@@ -184,7 +184,7 @@
                                     </tbody>
 
                                 <?php } 
-                                    else if($all->sender == "purchasing" && $all->recipient == "warehouse") {
+                                    else if($all->sender === "purchasing" && $all->recipient === "warehouse") {
                                 ?>
                                     <tbody>
                                         <tr>
@@ -233,7 +233,7 @@
 
                                         <tr>
                                             <td>Status GR</td>
-                                            <td><?php echo $all->status_gr; ?></td>
+                                            <td><?php echo $all->gr_status; ?></td>
                                         </tr>
 
                                         <tr>
@@ -274,27 +274,27 @@
 
                                         <tr>
                                             <td>PR Date</td>
-                                            <td><?php echo microtimeToDate($all->pr_date); ?></td>
+                                            <td><?php echo $all->pr_date; ?></td>
                                         </tr>
 
                                         <tr>
                                             <td>PO No.</td>
-                                            <td><?php echo microtimeToDate($all->po_no); ?></td>
+                                            <td><?php echo $all->po_no; ?></td>
                                         </tr>
 
                                         <tr>
                                             <td>Vendor Name</td>
-                                            <td><?php echo microtimeToDate($all->vendor_name); ?></td>
+                                            <td><?php echo $all->vendor_name; ?></td>
                                         </tr>
 
                                         <tr>
                                             <td>Vendor Code</td>
-                                            <td><?php echo microtimeToDate($all->vendor_code); ?></td>
+                                            <td><?php echo $all->vendor_code; ?></td>
                                         </tr>
 
                                         <tr>
                                             <td>Vendor City</td>
-                                            <td><?php echo microtimeToDate($all->vendor_name); ?></td>
+                                            <td><?php echo $all->vendor_city; ?></td>
                                         </tr>
 
                                         <tr>
@@ -318,8 +318,18 @@
                                         </tr>
 
                                         <tr>
+                                            <td>Price</td>
+                                            <td>Rp. <?php echo $all->price; ?></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Amount</td>
+                                            <td>Rp. <?php echo $all->amount; ?></td>
+                                        </tr>
+
+                                        <tr>
                                             <td>Status PR</td>
-                                            <td><?php echo $all->status_pr; ?></td>
+                                            <td><?php echo $all->pr_status; ?></td>
                                         </tr>
 
                                         <tr>

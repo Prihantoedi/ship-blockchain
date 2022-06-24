@@ -26,7 +26,7 @@
 						<div class="text-center mt-4">
 							<h1 class="h2">Get started</h1>
 							<p class="lead">
-								Enter Your Divison Here
+								Choose Your Divison Here
 							</p>
 						</div>
                         <?php 
@@ -44,8 +44,15 @@
 								<div class="m-sm-4">
 									<form method="POST" action="sign-up-create.php">
 										<div class="mb-3">
+											
 											<label class="form-label">Division</label>
-											<input class="form-control form-control-lg" type="text" name="division" placeholder="Enter your division" />
+											<select class="form-select" name="division" id="division">
+												<option id="engineering" selected>engineering</option>
+												<option id="material-logistics">material & logistics</option>
+												<option id="material-logistics">purchasing</option>
+												<option id="material-logistics">warehouse</option>
+											</select>
+											<!-- <input class="form-control form-control-lg" type="text" name="division" placeholder="Enter your division" /> -->
 										</div>
 									
 										<div class="text-center mt-3">

@@ -3,14 +3,13 @@
     require("../authorization.php");
     require("../connection.php");
     require("../function-center/encrypt-decrypt.php");
-    require("../function-center/time-conversion.php");    
+    require("../function-center/time-conversion.php");
     require("../function-center/notification-function.php");
     require("../function-center/validation-function.php");
 
+    require("../function-center/validation-submit-purchasing.php");
 
-    require("../function-center/validation-submit-material-logistics.php");
-
-    authorizationCheck("material-logistics-admin", $_SESSION);
+    authorizationCheck("purchasing-admin", $_SESSION);
 
     $sidebar_class = [
 		"home" => "sidebar-item", 
@@ -20,13 +19,14 @@
 		"validation" => "sidebar-item active"
 	];
 
-    $material_logistics_id = $_SESSION['id'];
+    $purchasing_id = $_SESSION['id'];
 
-    $getPendingValidation = pendingValidation($material_logistics_id, $conn);
+    $getPendingValidation = pendingValidation($purchasing_id, $conn);
     $need_validation = $getPendingValidation["need-validation"];
     $validate_num_count = $getPendingValidation["validate-num-count"];
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +34,8 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Galangan Kapal | Material & Logistics Admin</title>
+
+	<title>Galangan Kapal | Purchasing Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 	<link href="../css/app.css" rel="stylesheet">
 	<link href="../css/optional.css" rel="stylesheet">
@@ -42,8 +43,7 @@
 </head>
 
 <body>
-
-<?php 
+    <?php 
         if(isset($_POST['submit-validation'])){
 
 		?>
@@ -71,10 +71,10 @@
 
 		<?php }?>
 	<div class="wrapper">
-        <?php include("../sidebar/material-logistics-sidebar.php"); ?>	
-
+        <?php include("../sidebar/purchasing-sidebar.php"); ?>
+		
 		<div class="main">
-            <?php include("../navigation/material-logistics-navigation.php"); ?>
+            <?php include("../navigation/purchasing-navigation.php"); ?>
 
 			<main class="content scrollable">
 				<div class="container-fluid p-0">
@@ -83,7 +83,7 @@
 
 
 					<div class="row">
-						<div class="col-lg-12">
+						<div class="col">
                             <!-- Bila tidak ada validasi -->
                             <?php if(count($need_validation) == 0) { ?>
 							<div class="card flex-fill mt-2">
@@ -96,7 +96,7 @@
                                 else{
                                     foreach($need_validation as $validate){
                                     
-                                        if($validate[1]->sender == "engineering"){
+                                        if($validate[1]->sender == "material & logistics"){
 
                             ?>
                                 <form method="post" action="">
@@ -117,13 +117,48 @@
                                                 </tr>
 
                                                 <tr>
-                                                    <td>Project Name</td>
-                                                    <td><?php echo $validate[1]->project_name; ?> </td>
+                                                    <td>Project Code</td>
+                                                    <td><?php echo $validate[1]->project_code; ?></td>
                                                 </tr>
 
                                                 <tr>
-                                                    <td>Project Code</td>
-                                                    <td><?php echo $validate[1]->project_code; ?></td>
+                                                    <td>PO No.</td>
+                                                    <td><?php echo $validate[1]->po_no; ?></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Vendor Name</td>
+                                                    <td><?php echo $validate[1]->vendor_name; ?></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Vendor Code</td>
+                                                    <td><?php echo $validate[1]->vendor_code; ?></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Vendor City</td>
+                                                    <td><?php echo $validate[1]->vendor_city; ?></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>F-Item</td>
+                                                    <td><?php echo $validate[1]->f_item; ?></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Item Description</td>
+                                                    <td><?php echo $validate[1]->item_description; ?></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Quantity</td>
+                                                    <td><?php echo $validate[1]->quantity; ?></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Unit</td>
+                                                    <td><?php echo $validate[1]->unit; ?></td>
                                                 </tr>
 
                                                 
@@ -151,76 +186,59 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Sender</td>
-                                                    <td><?php echo $validate[1]->sender; ?></td>
+                                                    <td>Purchasing</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Recipient</td>
-                                                    <td><?php echo $validate[1]->recipient; ?></td>
+                                                    <td>Material & Logistics</td>
                                                 </tr>
 
                                                 <tr>
                                                     <td>PR No.</td>
-                                                    <td><?php echo $validate[1]->pr_no; ?></td>
+                                                    <td>RQBH1-20002570</td>
                                                 </tr>
 
                                                 <tr>
                                                     <td>PR Date</td>
-                                                    <td><?php echo $validate[1]->pr_date; ?></td>
+                                                    <td>30-Apr-2020</td>
                                                 </tr>
 
                                                 <tr>
                                                     <td>PO No.</td>
-                                                    <td><?php echo $validate[1]->po_no; ?></td>
+                                                    <td>POAK1-20000225</td>
                                                 </tr>
                                                 
 
                                                 <tr>
                                                     <td>F-Item</td>
-                                                    <td><?php echo $validate[1]->f_item; ?></td>
+                                                    <td>104-0006</td>
                                                 </tr>
 
                                                 <tr>
                                                     <td>Item Description</td>
-                                                    <td><?php echo $validate[1]->item_description; ?></td>
+                                                    <td>Besi Siku Uk. 30 x 30 x 5 x 6</td>
                                                 </tr>
 
                                                 <tr>
                                                     <td>Quantity</td>
-                                                    <td><?php echo $validate[1]->quantity; ?></td>
+                                                    <td>15</td>
                                                 </tr>
 
                                                 <tr>
                                                     <td>Unit</td>
-                                                    <td><?php echo $validate[1]->unit; ?></td>
-                                                </tr>
-                                                
-                                                <tr>
-                                                    <td>Price</td>
-                                                    <td>Rp. <?php echo $validate[1]->price; ?></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>Amount</td>
-                                                    <td>Rp. <?php echo $validate[1]->amount; ?></td>
+                                                    <td>Btg</td>
                                                 </tr>
 
                                                 <tr>
                                                     <td>Status PR</td>
-                                                    <td><?php echo $validate[1]->pr_status; ?></td>
+                                                    <td>Open</td>
                                                 </tr>
                                                 
                                             </tbody>
 
                                         </table>
-
-                                        <input id="input-trans-validation-<?php echo $validate[0]; ?>" name="trans-validation" type="hidden" value="">
-                                        <input id="input-trans-id-<?php echo $validate[0]; ?>" name="trans-id" type="hidden" value="">
-                                        
-                                        <a type="button" id="validate-<?php echo $validate[0]; ?>" class="validate btn btn-primary valid">Validate</a>
-                                        <a type="button" id="reject-<?php echo $validate[0];?>" class="reject btn btn-danger">Reject</a>
-                                        <button name="submit-validation" type="submit" id="btn-validation-status-<?php echo $validate[0]; ?>" hidden="hidden"></button>
-                                        
-
+                                        <a type="button" class="btn btn-primary valid">Validate</a>
+                                        <a href="#" class="btn btn-danger">Reject</a>
                                     </div>
                                 </div>
 
@@ -233,6 +251,7 @@
                                 }
                             ?>
 
+
                             <!-- <div class="card flex-fill mt-2">
 								<div class="card-header">
 								</div>
@@ -242,16 +261,104 @@
                                         <tbody>
                                             <tr>
                                                 <td>Sender</td>
-                                                <td>Engineering</td>
+                                                <td>Material & Logistics</td>
                                             </tr>
                                             <tr>
                                                 <td>Recipient</td>
-                                                <td>Material & Logistics</td>
+                                                <td>Purchasing</td>
                                             </tr>
 
                                             <tr>
-                                                <td>Project Name</td>
-                                                <td>DEMAG CRANE</td>
+                                                <td>PO No.</td>
+                                                <td>RQBH1-20002570</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Vendor Name</td>
+                                                <td>PT. SAMASUNDU ABIDRAYA</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Vendor Code</td>
+                                                <td>V-000019</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Vendor City</td>
+                                                <td>MKS</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>F-Item</td>
+                                                <td>104-0006</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Item Description</td>
+                                                <td>Besi Siku Uk. 30 x 30 x 5 x 6</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Quantity</td>
+                                                <td>15</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Unit</td>
+                                                <td>Btg</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Status PO</td>
+                                                <td>Close</td>
+                                            </tr>
+                                            
+                                        </tbody>
+
+                                    </table>
+									<a type="button" class="btn btn-primary valid">Validate</a>
+                                    <a href="#" class="btn btn-danger">Reject</a>
+								</div>
+							</div>
+
+                            <div class="card flex-fill mt-2">
+								<div class="card-header">
+								</div>
+
+                                <div class="card-body">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>Sender</td>
+                                                <td>Material & Logistics</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Recipient</td>
+                                                <td>Purchasing</td>
+                                            </tr>
+                                            <tr>
+                                                <td>PO No.</td>
+                                                <td>RQBH1-20002570</td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td>PO Date</td>
+                                                <td>14-Apr-20</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Vendor Name</td>
+                                                <td>PT. SAMASUNDU ABIDRAYA</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Vendor Code</td>
+                                                <td>V-000019</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Vendor City</td>
+                                                <td>MKS</td>
                                             </tr>
 
                                             <tr>
@@ -259,48 +366,6 @@
                                                 <td>DV1-18000003</td>
                                             </tr>
 
-                                            
-                                        </tbody>
-
-                                    </table>
-									<a type="button" class="btn btn-primary valid">Validate</a>
-                                    <a href="#" class="btn btn-danger">Reject</a>
-								</div>
-							</div>
-
-
-                            <div class="card flex-fill mt-2">
-								<div class="card-header">
-								</div>
-
-                                <div class="card-body">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <td>Sender</td>
-                                                <td>Purchasing</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Recipient</td>
-                                                <td>Material & Logistics</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>PR No.</td>
-                                                <td>RQBH1-20002570</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>PR Date</td>
-                                                <td>30-Apr-2020</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>PO No.</td>
-                                                <td>POAK1-20000225</td>
-                                            </tr>
-                                            
-
                                             <tr>
                                                 <td>F-Item</td>
                                                 <td>104-0006</td>
@@ -322,18 +387,18 @@
                                             </tr>
 
                                             <tr>
-                                                <td>Status PR</td>
+                                                <td>Status PO</td>
                                                 <td>Open</td>
                                             </tr>
-                                            
+
                                         </tbody>
 
                                     </table>
 									<a type="button" class="btn btn-primary valid">Validate</a>
                                     <a href="#" class="btn btn-danger">Reject</a>
 								</div>
-							</div>
-
+							</div>        
+                            
                             <div class="card flex-fill mt-2">
 								<div class="card-header">
 								</div>
@@ -343,54 +408,67 @@
                                         <tbody>
                                             <tr>
                                                 <td>Sender</td>
-                                                <td>Purchasing</td>
+                                                <td>Material & Logistics</td>
                                             </tr>
                                             <tr>
                                                 <td>Recipient</td>
-                                                <td>Material & Logistics</td>
+                                                <td>Purchasing</td>
                                             </tr>
-
-                                            <tr>
-                                                <td>PR No.</td>
-                                                <td>RQBH1-20002570</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>PR Date</td>
-                                                <td>30-Apr-2020</td>
-                                            </tr>
-
                                             <tr>
                                                 <td>PO No.</td>
-                                                <td>POAK1-20000225</td>
+                                                <td>POAK1-19000669</td>
                                             </tr>
-                                            
+
+                                            <tr>
+                                                <td>PO Date</td>
+                                                <td>1-Oct-19</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Vendor Name</td>
+                                                <td>PT. SAMASUNDU ABIDRAYA</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Vendor Code</td>
+                                                <td>V-000019</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Vendor City</td>
+                                                <td>MKS</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Project Code</td>
+                                                <td>DV1-19000008</td>
+                                            </tr>
 
                                             <tr>
                                                 <td>F-Item</td>
-                                                <td>104-0006</td>
+                                                <td>146-0006</td>
                                             </tr>
 
                                             <tr>
                                                 <td>Item Description</td>
-                                                <td>Besi Siku Uk. 30 x 30 x 5 x 6</td>
+                                                <td>Paku Uk. 5 cm</td>
                                             </tr>
 
                                             <tr>
                                                 <td>Quantity</td>
-                                                <td>15</td>
+                                                <td>1</td>
                                             </tr>
 
                                             <tr>
                                                 <td>Unit</td>
-                                                <td>Btg</td>
+                                                <td>Kg</td>
                                             </tr>
 
                                             <tr>
-                                                <td>Status PR</td>
-                                                <td>Close</td>
+                                                <td>Status PO</td>
+                                                <td>Open</td>
                                             </tr>
-                                            
+
                                         </tbody>
 
                                     </table>
@@ -451,6 +529,7 @@
 
 
     </script>
+
 </body>
 
 </html>
